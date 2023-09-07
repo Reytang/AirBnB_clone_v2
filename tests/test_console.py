@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""A unit test module for the console (command interpreter).
+"""
 import json
 import MySQLdb
 import os
@@ -15,7 +17,7 @@ from tests import clear_stream
 
 
 class TestHBNBCommand(unittest.TestCase):
-    """Represents the test class for the HBNBCommand class.
+    """Representing the test class for the HBNBCommand class.
     """
     @unittest.skipIf(
         os.getenv('HBNB_TYPE_STORAGE') == 'db', 'FileStorage test')
@@ -47,6 +49,7 @@ class TestHBNBCommand(unittest.TestCase):
         """
         with patch('sys.stdout', new=StringIO()) as cout:
             cons = HBNBCommand()
+            # creating a model with non-null attribute(s)
             with self.assertRaises(sqlalchemy.exc.OperationalError):
                 cons.onecmd('create User')
             # creating a User instance
@@ -108,9 +111,9 @@ class TestHBNBCommand(unittest.TestCase):
             cons.onecmd('show User {}'.format(obj.id))
             result = cursor.fetchone()
             self.assertTrue(result is not None)
-            self.assertIn('teamrj@gmail.com', result)
+            self.assertIn('ayo15@gmail.com', result)
             self.assertIn('123', result)
-            self.assertIn('teamrj@gmail.com', cout.getvalue())
+            self.assertIn('ayo15@gmail.com', cout.getvalue())
             self.assertIn('123', cout.getvalue())
             cursor.close()
             dbc.close()
